@@ -1,0 +1,47 @@
+<script>
+    var list = $('#list_category').html();
+
+    // verificar lista
+    select_mobile();
+
+    function select_mobile(){
+        //largura da tela
+        var screen = $(window).width();
+        if(screen <= 991){        
+            var action = true;
+        }else{
+            var action = false;
+        }
+
+        if(action){
+            $('.sidebarservices').each(function() {
+                var $select = $('<select />');
+
+                $(this).find('a').each(function() {
+                    var $option = $('<option />');
+                    $option.attr('value', $(this).data('slug')).html($(this).html());
+                    $select.append($option);
+                });
+
+                $select.addClass('form-control');
+                $(this).replaceWith($select);
+            });
+        }else{
+            $('#list_category').html(list);
+        } 
+    }
+
+    // verificar lista ao redimensionar tela
+    $(window).resize(function() {
+      select_mobile();
+    });
+</script>
+
+<nav id="list_category" class="col-md-3">
+  <ul class="sidebarservices">
+    <li class=""><span>|</span> <a href="javascript: void(0);" data-slug="alimentos">Alimentos</a></li>
+    <li class=""><span>|</span> <a href="javascript: void(0);" data-slug="artesanato-e-decoracao">Artesanato e Decoração</a></li>
+    <li class=""><span>|</span> <a href="javascript: void(0);" data-slug="artigos-religiosos">Artigos Religiosos</a></li>
+    <li class=""><span>|</span> <a href="javascript: void(0);" data-slug="automotivo">Automotivo</a></li>
+  </ul>
+</nav>
