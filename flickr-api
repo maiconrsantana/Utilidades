@@ -1,0 +1,30 @@
+<!--
+	api do flickr | buscar fotos por tags
+-->
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+$(document).ready(function() {
+
+  var url = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+  $.getJSON( url, {
+    tags: "Futebol Brasil",
+    tagmode: "any",
+    format: "json"
+  })
+    .done(function( data ) {
+    	alert(data);
+      $.each( data.items, function( i, item ) {
+        $( "<img>" ).attr( "src", item.media.m ).appendTo( "#div" );
+        if ( i === 5 ) {
+          return false;
+        }
+      });
+    });
+
+});
+</script>
+
+
+<div id="div"></div>
